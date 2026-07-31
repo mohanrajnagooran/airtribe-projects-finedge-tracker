@@ -124,3 +124,4 @@ endpoint, grouped into Users, Transactions, and Analytics folders, using `{{base
   breakdown, monthly grouping); `utils/aiHelper.js` turns that data into human-readable
   sentences and is written so it can later be swapped for a real LLM call without changing
   its callers.
+
