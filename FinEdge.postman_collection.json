@@ -1,0 +1,123 @@
+{
+  "info": {
+    "name": "FinEdge API",
+    "description": "Personal Finance & Expense Tracker API - collection covering users, transactions, and analytics endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "userId", "value": "" },
+    { "key": "transactionId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": { "method": "GET", "url": "{{baseUrl}}/" }
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/users",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@example.com\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/users" }
+        },
+        {
+          "name": "Get User By Id",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/users/{{userId}}" }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/users/{{userId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Jane Updated\"\n}" }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/users/{{userId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Create Transaction (Income)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/transactions",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"type\": \"income\",\n  \"category\": \"Salary\",\n  \"amount\": 5000,\n  \"description\": \"Monthly salary\",\n  \"date\": \"2026-07-01\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Transaction (Expense)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/transactions",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"type\": \"expense\",\n  \"category\": \"Groceries\",\n  \"amount\": 150.5,\n  \"description\": \"Weekly groceries\",\n  \"date\": \"2026-07-05\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Transactions",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/transactions" }
+        },
+        {
+          "name": "Get Transactions By User",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/transactions?userId={{userId}}" }
+        },
+        {
+          "name": "Get Transaction By Id",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/transactions/{{transactionId}}" }
+        },
+        {
+          "name": "Update Transaction",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/transactions/{{transactionId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"amount\": 175\n}" }
+          }
+        },
+        {
+          "name": "Delete Transaction",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/transactions/{{transactionId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get Summary",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/transactions/summary?userId={{userId}}" }
+        },
+        {
+          "name": "Get Monthly Insights",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/transactions/insights?userId={{userId}}" }
+        }
+      ]
+    }
+  ]
+}
